@@ -104,7 +104,7 @@ case ${1} in
 
     case ${1} in
       app:start)
-        init_or_upgrade_db "upgrade"
+        init_or_upgrade_db "init"
         start_server
         ;;
       app:init)
