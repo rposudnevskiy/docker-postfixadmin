@@ -72,7 +72,8 @@ init_or_upgrade_db() {
     echo "[INFO] Creating database"
     curl --silent --output /dev/null http://localhost/setup.php
     echo "[INFO] Creating admin user"
-    curl --silent --output /dev/null --data "form=createadmin&setup_password=$SETUP_PASSWORD&username=$ADMIN_USERNAME&password=$ADMIN_PASSWORD&password2=$ADMIN_PASSWORD" http://localhost/setup.php
+    adminpw=`dovecot pw -s MD5-CRYPT -p $ADMIN_PASSWORD | sed 's/{MD5-CRYPT}//'`
+    echo "insert into admin (username,password,superadmin) values ('$ADMIN_USERNAME','$ADMIN_PASSWORD',1)" | mysql --host=$MYSQL_HOST --user=$MYSQL_USER --password=$MYSQL_PASSWORD $MYSQL_DATABASE &>/dev/null
   else
     echo "[INFO] Updating database (if needed)"
     curl --silent --output /dev/null http://localhost/setup.php
