@@ -6,6 +6,7 @@ $CONF['database_user'] = getenv('MYSQL_USER');
 $CONF['database_password'] = getenv('MYSQL_PASSWORD');
 $CONF['database_name'] = getenv('MYSQL_DATABASE');
 $CONF['dovecotpw'] = "/usr/bin/doveadm pw";
+$CONF['encrypt'] = 'dovecot:CRAM-MD5';
 
 require_once '/config/__config.php';
 
